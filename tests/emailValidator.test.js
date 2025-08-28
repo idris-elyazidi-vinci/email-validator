@@ -19,4 +19,12 @@ describe("email validator - '@' presence", () => {
       expect(validateEmail("user@sub.domain.com")).toBe(true);
     });
   });
+
+  describe("email validator - no spaces", () => {
+    test("fails when email contains space anywhere", () => {
+      expect(validateEmail("user @example.com")).toBe(false);
+      expect(validateEmail("user@ example.com")).toBe(false);
+      expect(validateEmail(" user@example.com ")).toBe(false);
+    });
+  });
 });
