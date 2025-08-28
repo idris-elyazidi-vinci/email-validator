@@ -1,6 +1,15 @@
-function validateEmail(email) {
+function hasDomainDotNotLast(domain) {
+    return domain.includes('.') && !domain.endsWith('.');
+  }
+  
+  function validateEmail(email) {
     if (typeof email !== 'string') return false;
     if (!email.includes('@')) return false;
-    return true; // autres règles plus tard
+  
+    const atIndex = email.indexOf('@');
+    const domain = email.slice(atIndex + 1);
+    if (!hasDomainDotNotLast(domain)) return false;
+  
+    return true;
   }
   module.exports = validateEmail;
